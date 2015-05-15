@@ -3,7 +3,7 @@ var models = require('../models/models.js');
 //GET /quizes
 exports.index = function(req, res) {
 	var search = req.query.search;
-	if(search instanceof String){
+	if(search != undefined){
 		search = search.replace(/\s/ ,'%');
 	}
 	models.Quiz.findAll({where:["pregunta like ?", '%' + search + '%']}).then(function(quizes){
