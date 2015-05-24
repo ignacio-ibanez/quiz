@@ -39,7 +39,8 @@ exports.create = function(req, res){
 		// La sesion se define por la existencia de:  req.session.user
 
 		//Se añade la fecha como parametro
-		req.session.user = {id:user.id, username:user.username, horaSe: horaSe, minutosSe: minutosSe, segundosSe: segundosSe};
+		req.session.user = {id:user.id, username:user.username, isAdmin:user.isAdmin, 
+					horaSe: horaSe, minutosSe: minutosSe, segundosSe: segundosSe};
 
 		res.redirect(req.session.redir.toString()); // redireccion a path anterior y login
 	});
