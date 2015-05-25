@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<p>
+		<% for(index in quizes){ %>
+			<p> 
+				Pregunta: <%= quizes[index].pregunta %> 	
+				<form method="post" action="/user/<%= session.user.id%>/favourites/<%= quizes[index].id %>?_method=delete">
+						<input type="submit" value="Borrar de favoritos">
+				</form>	
+			</p>
+		<% } %>
+	</body>
+</html>			

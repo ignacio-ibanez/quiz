@@ -37,8 +37,7 @@ exports.create = function(req, res){
 
 		// Crear req.session.user y guardar campos id y username
 		// La sesion se define por la existencia de:  req.session.user
-
-		//Se añade la fecha como parametro
+		// Se añade la fecha como parametro
 		req.session.user = {id:user.id, username:user.username, isAdmin:user.isAdmin, 
 					horaSe: horaSe, minutosSe: minutosSe, segundosSe: segundosSe};
 

@@ -22,5 +22,16 @@
 						<button>Publicar</button></a></p>
 			<%}%>
 		<%}%>
+		<p>
+		<% if(session.user){ %>
+			<p>
+				<form method="post" action="/user/<%= session.user.id%>/favourites/<%= quizes[i].id %>?_method=put">
+						<input type="submit" value="Añadir a favoritos">
+				</form>	
+				<form method="post" action="/user/<%= session.user.id%>/favourites/<%= quizes[i].id %>?_method=delete">
+						<input type="submit" value="Borrar de favoritos">
+				</form>	
+			</p>
+		<%}%>	
 	</body>
 </html>			

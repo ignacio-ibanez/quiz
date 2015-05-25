@@ -58,24 +58,15 @@ app.use(function(req, res, next){
         var minutos = req.session.user.minutosSe;
         var segundos = req.session.user.segundosSe;
 
-        var out = 0;
-
-        if(horaNuevo !== hora){
-            if(((minutosNuevo + 60) >= (minutos + 2)) && (segundos >= segundosNuevo)){
-                out = 1;
-                console.log("Sesion cerrada");
-                delete req.session.user;
-                res.redirect(req.session.redir.toString());
-            }
+        if((horaNuevo !== hora) && ((minutosNuevo + 60) >= (minutos + 2)) && (segundos >= segundosNuevo)){
+            console.log("Sesion cerrada");
+            delete req.session.user;
+            res.redirect(req.session.redir.toString());
+        }else if( (horaNuevo === hora) && (minutosNuevo >= (minutos + 2)) && (segundos >= segundosNuevo)){
+            console.log("Sesion cerrada");
+            delete req.session.user;
+            res.redirect(req.session.redir.toString());
         }else {
-            if( (minutosNuevo >= (minutos + 2)) && (segundos >= segundosNuevo)){
-                out = 1;
-                console.log("Sesion cerrada");
-                delete req.session.user;
-                res.redirect(req.session.redir.toString());
-            }
-        }
-        if(out === 0){
             req.session.user.horaSe = horaNuevo;
             req.session.user.minutosSe = minutosNuevo;
             req.session.user.segundosSe = segundosNuevo;

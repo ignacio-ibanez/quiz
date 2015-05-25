@@ -38,6 +38,10 @@ var Comment = sequelize.import(comment_path);
 var user_path = path.join(__dirname, 'user');
 var User = sequelize.import(user_path);
 
+// Importar definción de la tabla Favourites
+//var favourites_path = path.join(__dirname, 'favourites');
+//var Favourites = sequelize.import(favourites_path);
+
 Comment.belongsTo(Quiz);
 Quiz.hasMany(Comment);
 
@@ -45,26 +49,14 @@ Quiz.hasMany(Comment);
 Quiz.belongsTo(User);
 User.hasMany(Quiz);
 
+// relacion entre usuarios y quizes favoritas
+User.belongsToMany(Quiz, {through: 'Favourites'});
+Quiz.belongsToMany(User, {through: 'Favourites'});
+
 exports.Quiz = Quiz; // Exportar definicion de tabla Quiz
 exports.Comment = Comment;
 exports.User = User;
-/*
-//squelize.sync() crea e inicializa tabla de preguntas en DB
-sequelize.sync().then(function(){
-	// then(..) ejecuta el manejador una vez creada la tabla
-	Quiz.count().then(function(count){
-		if(count === 0){	// La tabla se inicializa solo si está vacía
-			Quiz.create({ pregunta: 'Capital de Italia',
-						  respuesta: 'Roma'
-						});
-			Quiz.create({ pregunta: 'Capital de Portugal',
-						  respuesta: 'Lisboa'
-						})
-			.then(function(){console.log('Base de datos inicializa')});
-		};
-	});
-});
-*/
+//exports.Favourites = Favourites;
 
 //sequelize.sync() inicializa la tabla de preguntas en DB
 sequelize.sync().then(function(){
